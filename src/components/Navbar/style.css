@@ -1,0 +1,13 @@
+.nav-tabs {
+    min-height: 100px;
+    background: teal;
+    position: relative;
+  }
+
+  .nav-item{
+      color: white;
+  }
+
+  .nav-link{
+      color: white;
+  }
