@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Simulator from './pages/Simulator';
 import BallotAdder from './pages/BallotAdder';
 import Footer from './components/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // Comment

@@ -17,7 +17,7 @@ function Navbar() {
       </li>
       <li className="nav-item">
         <Link
-          to="/contact"
+          to="/simulator"
           className={location.pathname === "/simulator" ? "nav-link active" : "nav-link"}
         >
           Simulator
@@ -25,7 +25,7 @@ function Navbar() {
       </li>
       <li className="nav-item">
         <Link
-          to="/portfolio"
+          to="/ballotadder"
           className={location.pathname === "/ballotadder" ? "nav-link active" : "nav-link"}
         >
           Ballot Adder
