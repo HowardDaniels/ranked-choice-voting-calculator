@@ -5,8 +5,7 @@ var $candidateTitle = $(".candidateTitle");
 
 var activeCandidate = {};
 
-
-// A function for getting all notes from the db
+// A function for getting all candidates from the db
 var getCandidates = function() {
   return $.ajax({
     url: "/api/candidates",
@@ -14,7 +13,7 @@ var getCandidates = function() {
   });
 };
 
-// A function for saving a note to the db
+// A function for saving a candidate to the db
 var saveCandidate = function(candidate) {
   return $.ajax({
     url: "/api/candidates",
@@ -23,7 +22,7 @@ var saveCandidate = function(candidate) {
   });
 };
 
-// A function for deleting a note from the db
+// A function for deleting a candidate from the db
 var deleteCandidate = function(id) {
   return $.ajax({
     url: "/api/candidates/" + id,
@@ -31,7 +30,7 @@ var deleteCandidate = function(id) {
   });
 };
 
-// If there is an activeNote, display it, otherwise render empty inputs
+// If there is an activeCandidate, display it, otherwise render empty inputs
 var renderActiveCandidate = function() {
   $saveCandidateBtn.hide();
 
@@ -44,26 +43,18 @@ var renderActiveCandidate = function() {
   }
 };
 
-// Get the note data from the inputs, save it to the db and update the view
-var handleCandidate = function() {
+// Get the candidate data from the inputs, save it to the db and update the view
+var handleCandidateSave = function() {
   var newCandidate = {
     name: $newCandidateInput.val()
   };
-
-  var candidate = $(this)
-  .parent(".list-group-item")
-  .data();
-
-  if (activeCandidate.id === candidate.id) {
-    activeCandidate = {};
-  }
 
   saveCandidate(newCandidate).then(function(data) {
     getAndRenderCandidates();
   });
 };
 
-// Delete the clicked note
+// Delete the clicked candiddate
 var handleCandidateDelete = function(event) {
   // prevents the click listener for the list from being called when the button inside of it is clicked
   event.stopPropagation();
@@ -95,17 +86,7 @@ var handleNewCandidateView = function() {
   renderActiveCandidate();
 };
 
-// If a note's title or text are empty, hide the save button
-// Or else show it
-// var handleRenderSaveBtn = function() {
-//   if (!$noteTitle.val().trim() || !$noteText.val().trim()) {
-//     $saveNoteBtn.hide();
-//   } else {
-//     $saveNoteBtn.show();
-//   }
-// };
-
-// Render's the list of note titles
+// Renders the list of candidate titles
 var renderCandidateList = function(candidates) {
   $candidateList.empty();
 
@@ -113,6 +94,9 @@ var renderCandidateList = function(candidates) {
 
   for (var i = 0; i < candidates.length; i++) {
     var candidate = candidates[i];
+
+    console.log(candidates)
+    localStorage.setItem("name" + i, candidate.name);
 
     var $li = $("<li class='list-group-item'>").data(candidate);
     var $span = $("<span>").text(candidate.name);
@@ -127,43 +111,112 @@ var renderCandidateList = function(candidates) {
   $candidateList.append(candidateListItems);
 };
 
-// var renderNoteList = function(notes) {
-//   $noteList.empty();
-
-//   var noteListItems = [];
-
-//   for (var i = 0; i < notes.length; i++) {
-//     var note = notes[i];
-
-//     var $li = $("<li class='list-group-item'>").data(note);
-//     var $span = $("<span>").text(note.title);
-//     var $delBtn = $(
-//       "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
-//     );
-
-//     $li.append($span, $delBtn);
-//     noteListItems.push($li);
-//   }
-
-//   $noteList.append(noteListItems);
-// };
-
-// Gets notes from the db and renders them to the sidebar
+// Gets candidates from the db and renders them
 var getAndRenderCandidates = function() {
   return getCandidates().then(function(data) {
     renderCandidateList(data);
   });
 };
 
-$newCandidate.on("click", handleCandidate);
+$newCandidate.on("click", handleCandidateSave);
 
-// $saveNoteBtn.on("click", handleNoteSave);
-// $noteList.on("click", ".list-group-item", handleNoteView);
-// $newNoteBtn.on("click", handleNewNoteView);
+$candidateList.on("click", ".list-group-item", handleCandidateView);
+
 $candidateList.on("click", ".delete-note", handleCandidateDelete);
-// $noteTitle.on("keyup", handleRenderSaveBtn);
-// $noteText.on("keyup", handleRenderSaveBtn);
 
-// Gets and renders the initial list of notes
+// Gets and renders the initial list of candidates
 getAndRenderCandidates();
-// $delBtn.on("click", handleCandidateDelete);
+
+let url = '/api/candidates';
+
+fetch(url)
+.then(res => res.json())
+.then((out) => {
+  console.log('Checkout this JSON! ', out);
+  console.log(out.length);
+  var options = document.getElementById("firstChoice").querySelectorAll("option");
+  var options2 = document.getElementById("secondChoice").querySelectorAll("option");
+  var options3 = document.getElementById("thirdChoice").querySelectorAll("option");
+  // console.log(options);
+
+  for (i = 0; i < options.length; i++){
+    if(options[i].value >= out.length){
+      options[i].remove();
+    }
+  }
+
+  for (i = 0; i < options2.length; i++){
+    if(options2[i].value >= out.length){
+      options2[i].remove();
+    }
+  }
+
+  for (i = 0; i < options3.length; i++){
+    if(options3[i].value >= out.length){
+      options3[i].remove();
+    }
+  }
+
+  for (i = 0; i < out.length; i++){
+    if(options[i + 1].value == i){
+      options[i + 1].innerText = out[i].name;
+    }
+  };
+
+  var firstchoiceval = document.getElementById("firstChoice").value;
+  var secondchoiceval = document.getElementById("secondChoice").value;
+  var thirdchoiceval = document.getElementById("thirdChoice").value;
+
+  document.getElementById("firstChoice").addEventListener("click", function(){
+    console.log(firstchoiceval);
+
+    for (i = 0; i < out.length; i++){
+      if(options2[i + 1].value == i){
+        options2[i + 1].innerText = out[i].name;
+      }
+    };
+
+    for (i = 1; i < options2.length; i++){
+      if (options2[i].value == firstchoiceval){
+        options2[i].innerText = "No preference";
+      }
+    }
+
+    document.getElementById("secondChoice").addEventListener("click", function(){
+      for (i = 0; i < out.length; i++){
+        if(options3[i + 1].value == i){
+          options3[i + 1].innerText = out[i].name;
+        }
+      };
+    
+      for (i = 1; i < options3.length; i++){
+        if (options3[i].value == firstchoiceval || options3[i].value == secondchoiceval){
+          options3[i].innerText = "No preference";
+        }
+      }
+    
+    
+    });
+
+    document.getElementById("thirdChoice").addEventListener("click", function(){
+      console.log(firstchoiceval + ", " + secondchoiceval + ", " + thirdchoiceval)
+      })
+})
+
+if (document.getElementById("firstChoice").value == out[0].name){
+  alert("yeah");
+}
+
+$("#100").on("click", function(){
+  alert("yeah");
+})
+
+$(document).ready(function(){
+  $("select#firstChoice").change(function(){
+      var selectedCountry = $(this).children("option:selected").val();
+      alert("You have selected the country - " + selectedCountry);
+  });
+});
+
+})
+.catch(err => { throw err });
