@@ -13,6 +13,14 @@ var getCandidates = function() {
   });
 };
 
+// A function for getting all ballots from the db
+var getBallots = function() {
+  return $.ajax({
+    url: "/api/ballots",
+    method: "GET"
+  });
+};
+
 // A function for saving a candidate to the db
 var saveCandidate = function(candidate) {
   return $.ajax({
@@ -22,10 +30,27 @@ var saveCandidate = function(candidate) {
   });
 };
 
+// A function for saving a ballot to the db
+var saveBallot = function(ballot) {
+  return $.ajax({
+    url: "/api/ballots",
+    data: ballot,
+    method: "POST"
+  });
+};
+
 // A function for deleting a candidate from the db
 var deleteCandidate = function(id) {
   return $.ajax({
     url: "/api/candidates/" + id,
+    method: "DELETE"
+  });
+};
+
+// A function for deleting a ballot from the db
+var deleteBallot = function(id) {
+  return $.ajax({
+    url: "/api/ballots/" + id,
     method: "DELETE"
   });
 };
@@ -168,7 +193,6 @@ fetch(url)
   var thirdchoiceval = document.getElementById("thirdChoice").value;
 
   document.getElementById("firstChoice").addEventListener("click", function(){
-    console.log(firstchoiceval);
 
     for (i = 0; i < out.length; i++){
       if(options2[i + 1].value == i){
@@ -211,12 +235,36 @@ $("#100").on("click", function(){
   alert("yeah");
 })
 
-$(document).ready(function(){
-  $("select#firstChoice").change(function(){
-      var selectedCountry = $(this).children("option:selected").val();
-      alert("You have selected the country - " + selectedCountry);
-  });
+// $(document).ready(function(){
+//   $("select#firstChoice").change(function(){
+//       var selectedCandidate = $(this).children("option:selected").val();
+//       console.log(selectedCandidate);
+//   });
+// });
+
+$("#submit").on("click", function(){
+  var cand1 = $("#firstChoice").children("option:selected").val();
+  var cand2 = $("#secondChoice").children("option:selected").val();
+  var cand3 = $("#thirdChoice").children("option:selected").val();
+
+  var message;
+
+  if (cand1 == "x" || cand1 == cand2 || cand1 == cand3 || cand2 == cand3){
+    message = "INVALID BALLOT";
+    console.log(message);
+    saveBallot(ballot){
+      
+    }
+  }
+  else {
+    message = cand1 + ", " + cand2 + ", " + cand3;
+    console.log(message);
+  };
+
+
 });
+
+
 
 })
 .catch(err => { throw err });

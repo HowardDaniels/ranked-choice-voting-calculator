@@ -34,6 +34,11 @@ module.exports = function(app) {
   console.log(res);
   });
 
+  app.get("/api/ballots", function(req, res){
+    res.json(ballots);
+    console.log(res);
+  })
+
 /*
   app.get("/api/waitlist", function(req, res) {
     res.json(waitListData);
@@ -69,6 +74,18 @@ req.body.id = candidates.length;
     } */
   });
 
+  app.post("/api/ballots", function(req, res){
+    ballots.push(req.body);
+    req.body.id = ballots.length;
+    fs.writeFile("ballots.json", JSON.stringify(ballots), function(err){
+      if (err) {
+        throw err;
+      }
+    });
+
+    res.json(true);
+  });
+
   // ---------------------------------------------------------------------------
 // DELETE
 
@@ -93,6 +110,29 @@ req.body.id = candidates.length;
     waitListData.push(req.body);
     res.json(false);
   } */
+});
+
+app.delete("/api/ballots/:id", function(req, res) {
+  // Sets length of note to 0
+  // notes.length = 0;
+  var id = req.params.id;
+  console.log(id);
+  ballots.splice(ballots.id, 1);
+  console.log("I just deleted")
+ 
+  //write back to journal.json
+  fs.writeFile("ballots.json", JSON.stringify(ballots), function(err) {
+    if (err) {
+      throw err;
+    }
+  });
+
+  res.json(true);
+/*   }
+else {
+  waitListData.push(req.body);
+  res.json(false);
+} */
 });
 
   

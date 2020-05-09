@@ -93,3 +93,7 @@ html, body {
     background-color: green;
     color: white;
   }
+
+  #submit{
+    background-color: red;
+  }
