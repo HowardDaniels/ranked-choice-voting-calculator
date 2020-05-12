@@ -117,8 +117,19 @@ app.delete("/api/ballots/:id", function(req, res) {
   // notes.length = 0;
   var id = req.params.id;
   console.log(id);
+  console.log(ballots);
+  console.log(JSON.stringify(ballots));
+  // console.log(this.id);
   ballots.splice(ballots.id, 1);
   console.log("I just deleted")
+
+  // for (i = 0; i<ballot.length; i++){
+  //   ballot[i].id = i+1;
+  //   console.log(ballot[i].name);
+  // }
+
+  // 1, 2, 3, 4, 5, 6
+  // 1, 2, 4, 5, 6
  
   //write back to journal.json
   fs.writeFile("ballots.json", JSON.stringify(ballots), function(err) {

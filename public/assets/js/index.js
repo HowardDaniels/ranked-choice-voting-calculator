@@ -243,23 +243,30 @@ $("#100").on("click", function(){
 // });
 
 $("#submit").on("click", function(){
-  var cand1 = $("#firstChoice").children("option:selected").val();
-  var cand2 = $("#secondChoice").children("option:selected").val();
-  var cand3 = $("#thirdChoice").children("option:selected").val();
+  var cand1 = parseInt($("#firstChoice").children("option:selected").val());
+  var cand2 = parseInt($("#secondChoice").children("option:selected").val());
+  var cand3 = parseInt($("#thirdChoice").children("option:selected").val());
 
   var message;
+
+  var ballot = {
+    firstChoice: cand1,
+    secondChoice: cand2,
+    thirdChoice: cand3
+  }
 
   if (cand1 == "x" || cand1 == cand2 || cand1 == cand3 || cand2 == cand3){
     message = "INVALID BALLOT";
     console.log(message);
-    saveBallot(ballot){
-      
-    }
   }
   else {
     message = cand1 + ", " + cand2 + ", " + cand3;
     console.log(message);
+    saveBallot(ballot);
+    console.log(ballot);
+    // deleteBallot(ballot[0])
   };
+
 
 
 });
