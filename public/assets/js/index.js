@@ -242,6 +242,124 @@ $("#100").on("click", function(){
 //   });
 // });
 
+var renderBallotList = function(ballots) {
+  // $candidateList.empty();
+
+  var ballotListItems = [];
+
+  for (var i = 0; i < ballots.length; i++) {
+    var ballot = ballots[i];
+    localStorage.setItem("name" + i, ballot.name);
+    ballotListItems.push(ballots[i]);
+    // var $li = $("<li class='list-group-item'>").data(candidate);
+    // var $span = $("<span>").text(candidate.name);
+    // var $delBtn = $(
+    //   "<button class='delete-note'>Delete</button>"
+    // );
+
+    // $li.append($span, $delBtn);
+    // candidateListItems.push($li);
+  }
+  console.log(ballotListItems);
+
+var firstPref = [];
+
+for (i = 0; i < out.length; i++){
+  firstPref.push({
+    name: i,
+    ballots: []
+  });
+}
+
+// console.log(firstPref);
+
+for (i = 0; i < out.length; i++){
+  var array = [];
+  for (j = 0; j < ballots.length; j++){
+    if (ballots[j].firstChoice == i){
+      array.push(j);
+      firstPref[i].ballots = array;
+    }
+  }
+}
+
+console.log(firstPref);
+
+var secondPref = [];
+
+for (i = 0; i < out.length; i++){
+  secondPref.push({
+    name: i,
+    ballots: []
+  });
+}
+
+// console.log(secondPref);
+
+for (i = 0; i < out.length; i++){
+  var array = [];
+  for (j = 0; j < ballots.length; j++){
+    if (ballots[j].secondChoice == i){
+      array.push(j);
+      secondPref[i].ballots = array;
+    }
+  }
+}
+
+console.log(secondPref);
+
+var thirdPref = [];
+
+for (i = 0; i < out.length; i++){
+  thirdPref.push({
+    name: i,
+    ballots: []
+  });
+}
+
+// console.log(secondPref);
+
+for (i = 0; i < out.length; i++){
+  var array = [];
+  for (j = 0; j < ballots.length; j++){
+    if (ballots[j].thirdChoice == i){
+      array.push(j);
+      thirdPref[i].ballots = array;
+    }
+  }
+}
+
+console.log(thirdPref);
+
+var results1 = [];
+
+var total1 = 0;
+for (i = 0; i < out.length; i++){
+  total1 += firstPref[i].ballots.length;
+}
+
+for (i = 0; i < out.length; i++){
+  results1.push({
+    name: out[i].name,
+    votes: firstPref[i].ballots.length,
+    percent: (firstPref[i].ballots.length * 100)/total1
+  });
+}
+
+console.log(results1);
+
+  // $candidateList.append(candidateListItems);
+};
+
+// Gets candidates from the db and renders them
+var getAndRenderBallots = function() {
+  return getBallots().then(function(data) {
+    renderBallotList(data);
+  });
+};
+
+getAndRenderBallots();
+
 $("#submit").on("click", function(){
   var cand1 = parseInt($("#firstChoice").children("option:selected").val());
   var cand2 = parseInt($("#secondChoice").children("option:selected").val());
@@ -264,10 +382,12 @@ $("#submit").on("click", function(){
     console.log(message);
     saveBallot(ballot);
     console.log(ballot);
+    // tallyVotes();
+    getAndRenderBallots();
+    console.log(`${out[0].name}: `)
+    console.log(ballot[0] + ", " + ballot[1])
     // deleteBallot(ballot[0])
   };
-
-
 
 });
 
