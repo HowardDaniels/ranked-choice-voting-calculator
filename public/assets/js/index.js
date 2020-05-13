@@ -260,6 +260,26 @@ var renderBallotList = function(ballots) {
     // $li.append($span, $delBtn);
     // candidateListItems.push($li);
   }
+
+var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+var sampleSpace = [];
+
+for(i = 0; i < alphabet.length; i++){
+  for(j = 0; j < alphabet.length; j++){
+    for(k = 0; k < alphabet.length; k++){
+      if ((i < out.length || i == 25) && (j < out.length || j == 25) && (k < out.length || k == 25)){
+        sampleSpace.push({
+          code: alphabet[i] + alphabet[j] + alphabet[k],
+          votes: 0
+        });
+      }
+    }
+  }
+}
+
+console.log(sampleSpace)
+
   console.log(ballotListItems);
 
 var firstPref = [];
@@ -332,8 +352,11 @@ for (i = 0; i < out.length; i++){
 console.log(thirdPref);
 
 var results1 = [];
+var results2 = [];
 
 var total1 = 0;
+var total2 = 0;
+
 for (i = 0; i < out.length; i++){
   total1 += firstPref[i].ballots.length;
 }
@@ -347,6 +370,47 @@ for (i = 0; i < out.length; i++){
 }
 
 console.log(results1);
+
+var nextRoundNeeded = 0;
+
+for (i = 0; i < results1.length; i++){
+  if (results1[i].percent > 50){
+  console.log("Winner: " + results1[i].name);
+  }
+  else{
+    nextRoundNeeded += 1;
+  }
+
+}
+
+if (nextRoundNeeded == results1.length){
+  console.log("Next round needed");
+  var arrayforElimination = [];
+  for (i = 0; i < results1.length; i++){
+    arrayforElimination.push(results1[i].percent);
+  }
+  console.log(Math.min.apply(Math, arrayforElimination));
+  var eliminatedCandidate1;
+  for (i = 0; i < results1.length; i++){
+    if (results1[i].percent == Math.min.apply(Math, arrayforElimination)){
+      eliminatedCandidate1 = results1[i].name;
+      console.log(eliminatedCandidate1);
+    }
+  }
+ 
+}
+
+const arraynum = [2, 5, 9];
+
+console.log(arraynum);
+
+const index = arraynum.indexOf(5);
+if (index > -1) {
+  arraynum.splice(index, 1);
+}
+
+// array = [2, 9]
+console.log(arraynum); 
 
   // $candidateList.append(candidateListItems);
 };
