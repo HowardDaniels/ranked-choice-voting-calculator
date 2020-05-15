@@ -271,9 +271,56 @@ for(i = 0; i < alphabet.length; i++){
       if ((i < out.length || i == 25) && (j < out.length || j == 25) && (k < out.length || k == 25)){
         sampleSpace.push({
           code: alphabet[i] + alphabet[j] + alphabet[k],
-          votes: 0
+          votes: 0,
+          status: ""
         });
       }
+    }
+  }
+}
+
+for (i = 0; i < sampleSpace.length; i++){
+  if ((sampleSpace[i].code).charAt(0) == "Z"){
+    sampleSpace[i].status = "invalid";
+  }
+  if((sampleSpace[i].code).charAt(0) == (sampleSpace[i].code).charAt(1)){
+      sampleSpace[i].status = "invalid";
+  }
+  if((sampleSpace[i].code).charAt(0) == (sampleSpace[i].code).charAt(2)){
+    sampleSpace[i].status = "invalid";
+}
+if((sampleSpace[i].code).charAt(1) == (sampleSpace[i].code).charAt(2) && (sampleSpace[i].code).charAt(1) !== "Z" && (sampleSpace[i].code).charAt(2) !== "Z"){
+  sampleSpace[i].status = "invalid";
+}
+if((sampleSpace[i].code).charAt(1) == "Z" && (sampleSpace[i].code).charAt(2) !== "Z"){
+  sampleSpace[i].status = "invalid";
+}
+// else{
+//   sampleSpace[i].status = "valid";
+// }
+if (sampleSpace[i].status == ""){
+  sampleSpace[i].status = "valid";
+}
+  
+}
+
+for (i = 0; i < ballots.length; i++){
+  if (ballots[i].firstChoice == "NaN"){
+    ballots[i].firstChoice = 25;
+  }
+  if (ballots[i].secondChoice == "NaN"){
+    ballots[i].secondChoice = 25;
+  }
+  if (ballots[i].thirdChoice == "NaN"){
+    ballots[i].thirdChoice = 25;
+  }
+}
+
+for (i = 0; i < sampleSpace.length; i++){
+  for (j = 0; j < ballots.length; j++){
+
+    if (((sampleSpace[i].code).charAt(0) == alphabet[ballots[j].firstChoice]) && ((sampleSpace[i].code).charAt(1) == alphabet[ballots[j].secondChoice]) && ((sampleSpace[i].code).charAt(2) == alphabet[ballots[j].thirdChoice])){
+      sampleSpace[i].votes += 1;
     }
   }
 }
@@ -282,135 +329,169 @@ console.log(sampleSpace)
 
   console.log(ballotListItems);
 
-var firstPref = [];
+  var firstRound = [];
+  var firstRoundTotal = 0;
 
+  for (i = 0; i < out.length; i++){
+    var addVotes = 0;
+    for (j = 0; j < sampleSpace.length; j++){
+      if (sampleSpace[j].status == "valid" && (sampleSpace[j].code).charAt(0) == alphabet[i]){
+        addVotes += sampleSpace[j].votes;
+      }
+    }
+    firstRound.push({
+      name: out[i].name,
+      votes: addVotes
+    })
+    firstRoundTotal += addVotes;
+  }
+
+console.log(firstRound)
+console.log(firstRoundTotal);
+
+var potentialRunoffRounds = out.length - 2;
+console.log(potentialRunoffRounds);
+
+function nextRound(){
+  // determine if first round or subsequent round just finished
+  var voteList = [];
 for (i = 0; i < out.length; i++){
-  firstPref.push({
-    name: i,
-    ballots: []
-  });
+  if (out[i].votes == Math.min.apply(min, voteList)){
+var eliminated = out[i];    
+  }
 }
+out[eliminated].votes = 0;
+}
+
+// var firstPref = [];
+
+// for (i = 0; i < out.length; i++){
+//   firstPref.push({
+//     name: i,
+//     ballots: []
+//   });
+// }
+
+// // console.log(firstPref);
+
+// for (i = 0; i < out.length; i++){
+//   var array = [];
+//   for (j = 0; j < ballots.length; j++){
+//     if (ballots[j].firstChoice == i){
+//       array.push(j);
+//       firstPref[i].ballots = array;
+//     }
+//   }
+// }
 
 // console.log(firstPref);
 
-for (i = 0; i < out.length; i++){
-  var array = [];
-  for (j = 0; j < ballots.length; j++){
-    if (ballots[j].firstChoice == i){
-      array.push(j);
-      firstPref[i].ballots = array;
-    }
-  }
-}
+// var secondPref = [];
 
-console.log(firstPref);
+// for (i = 0; i < out.length; i++){
+//   secondPref.push({
+//     name: i,
+//     ballots: []
+//   });
+// }
 
-var secondPref = [];
+// // console.log(secondPref);
 
-for (i = 0; i < out.length; i++){
-  secondPref.push({
-    name: i,
-    ballots: []
-  });
-}
-
-// console.log(secondPref);
-
-for (i = 0; i < out.length; i++){
-  var array = [];
-  for (j = 0; j < ballots.length; j++){
-    if (ballots[j].secondChoice == i){
-      array.push(j);
-      secondPref[i].ballots = array;
-    }
-  }
-}
-
-console.log(secondPref);
-
-var thirdPref = [];
-
-for (i = 0; i < out.length; i++){
-  thirdPref.push({
-    name: i,
-    ballots: []
-  });
-}
+// for (i = 0; i < out.length; i++){
+//   var array = [];
+//   for (j = 0; j < ballots.length; j++){
+//     if (ballots[j].secondChoice == i){
+//       array.push(j);
+//       secondPref[i].ballots = array;
+//     }
+//   }
+// }
 
 // console.log(secondPref);
 
-for (i = 0; i < out.length; i++){
-  var array = [];
-  for (j = 0; j < ballots.length; j++){
-    if (ballots[j].thirdChoice == i){
-      array.push(j);
-      thirdPref[i].ballots = array;
-    }
-  }
-}
+// var thirdPref = [];
 
-console.log(thirdPref);
+// for (i = 0; i < out.length; i++){
+//   thirdPref.push({
+//     name: i,
+//     ballots: []
+//   });
+// }
 
-var results1 = [];
-var results2 = [];
+// // console.log(secondPref);
 
-var total1 = 0;
-var total2 = 0;
+// for (i = 0; i < out.length; i++){
+//   var array = [];
+//   for (j = 0; j < ballots.length; j++){
+//     if (ballots[j].thirdChoice == i){
+//       array.push(j);
+//       thirdPref[i].ballots = array;
+//     }
+//   }
+// }
 
-for (i = 0; i < out.length; i++){
-  total1 += firstPref[i].ballots.length;
-}
+// console.log(thirdPref);
 
-for (i = 0; i < out.length; i++){
-  results1.push({
-    name: out[i].name,
-    votes: firstPref[i].ballots.length,
-    percent: (firstPref[i].ballots.length * 100)/total1
-  });
-}
+// var results1 = [];
+// var results2 = [];
 
-console.log(results1);
+// var total1 = 0;
+// var total2 = 0;
 
-var nextRoundNeeded = 0;
+// for (i = 0; i < out.length; i++){
+//   total1 += firstPref[i].ballots.length;
+// }
 
-for (i = 0; i < results1.length; i++){
-  if (results1[i].percent > 50){
-  console.log("Winner: " + results1[i].name);
-  }
-  else{
-    nextRoundNeeded += 1;
-  }
+// for (i = 0; i < out.length; i++){
+//   results1.push({
+//     name: out[i].name,
+//     votes: firstPref[i].ballots.length,
+//     percent: (firstPref[i].ballots.length * 100)/total1
+//   });
+// }
 
-}
+// console.log(results1);
 
-if (nextRoundNeeded == results1.length){
-  console.log("Next round needed");
-  var arrayforElimination = [];
-  for (i = 0; i < results1.length; i++){
-    arrayforElimination.push(results1[i].percent);
-  }
-  console.log(Math.min.apply(Math, arrayforElimination));
-  var eliminatedCandidate1;
-  for (i = 0; i < results1.length; i++){
-    if (results1[i].percent == Math.min.apply(Math, arrayforElimination)){
-      eliminatedCandidate1 = results1[i].name;
-      console.log(eliminatedCandidate1);
-    }
-  }
+// var nextRoundNeeded = 0;
+
+// for (i = 0; i < results1.length; i++){
+//   if (results1[i].percent > 50){
+//   console.log("Winner: " + results1[i].name);
+//   }
+//   else{
+//     nextRoundNeeded += 1;
+//   }
+
+// }
+
+// if (nextRoundNeeded == results1.length){
+//   console.log("Next round needed");
+//   var arrayforElimination = [];
+//   for (i = 0; i < results1.length; i++){
+//     arrayforElimination.push(results1[i].percent);
+//   }
+//   console.log(Math.min.apply(Math, arrayforElimination));
+//   var eliminatedCandidate1;
+//   for (i = 0; i < results1.length; i++){
+//     if (results1[i].percent == Math.min.apply(Math, arrayforElimination)){
+//       eliminatedCandidate1 = results1[i].name;
+//       console.log(eliminatedCandidate1);
+//     }
+//   }
  
-}
+// }
 
-const arraynum = [2, 5, 9];
+// const arraynum = [2, 5, 9];
 
-console.log(arraynum);
+// console.log(arraynum);
 
-const index = arraynum.indexOf(5);
-if (index > -1) {
-  arraynum.splice(index, 1);
-}
+// const index = arraynum.indexOf(5);
+// if (index > -1) {
+//   arraynum.splice(index, 1);
+// }
 
-// array = [2, 9]
-console.log(arraynum); 
+// // array = [2, 9]
+// console.log(arraynum); 
 
   // $candidateList.append(candidateListItems);
 };
