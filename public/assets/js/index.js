@@ -352,6 +352,31 @@ console.log(firstRoundTotal);
 var potentialRunoffRounds = out.length - 2;
 console.log(potentialRunoffRounds);
 
+// absolute Mehrheit? 
+// wenn nein:
+// Mindestzahl finden
+// Mindestzahl mit 0 ersetzen
+// zweite Preferezen vom Verlierer finden
+// Stimmen an die jeweiligen anderen Kandidaten verteilen
+
+// [AZZ, BZZ, CZZ, ABZ, ACZ, BAZ, BCZ, CAZ, CBZ, ABC, ACB, BAC, BCA, CAB, CBA]
+
+// A: [AZZ, ABZ, ACZ, ABC, ACB]
+// B: [BZZ, BAZ, BCZ, BAC, BCA]
+// C: [CZZ, CAZ, CBZ, CAB, CBA] {eliminated}
+
+// for (i = 0; i < carray.length; i++){
+// for (j = 0; j < dividedSampleSpace.length; j++){
+// if (carray[i].code.charAt(1) == dividedSampleSpace[j].letter){
+// remove carray [i];
+// dividedSampleSpace[j].codes.append(carray[i]);
+// }
+// }
+// }
+
+// A: [AZZ, ABZ, ACZ, ABC, ACB, CAZ, CAB]
+// B: [BZZ, BAZ, BCZ, BAC, BCA, CBZ, CBA]
+
 function nextRound(){
   // determine if first round or subsequent round just finished
   var voteList = [];
