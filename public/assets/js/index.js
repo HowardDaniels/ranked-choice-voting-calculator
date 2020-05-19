@@ -349,8 +349,37 @@ console.log(sampleSpace)
 console.log(firstRound)
 console.log(firstRoundTotal);
 
-var potentialRunoffRounds = out.length - 2;
-console.log(potentialRunoffRounds);
+var potentialRounds = out.length - 1;
+console.log(potentialRounds);
+
+var resultsArray = [];
+
+var candidatesPlusInvalid = []
+
+for (i = 0; i < out.length; i++){
+  candidatesPlusInvalid.push({
+    letter: alphabet[i],
+    ballots: [],
+    total: 0
+  });
+}
+
+candidatesPlusInvalid.push({
+  letter: "Z",
+ballots: [],
+total: 0
+});
+
+for (i = 0; i < potentialRounds; i++){
+ 
+  resultsArray.push({
+    round: i + 1,
+    candidates: candidatesPlusInvalid
+  })
+
+}
+
+console.log(resultsArray);
 
 // absolute Mehrheit? 
 // wenn nein:
