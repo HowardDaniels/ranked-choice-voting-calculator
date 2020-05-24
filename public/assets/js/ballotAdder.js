@@ -381,6 +381,115 @@ for (i = 0; i < potentialRounds; i++){
 
 console.log(resultsArray);
 
+var a1 = 0;
+var b1 = 0;
+var c1 = 0;
+var d1 = 0;
+var e1 = 0;
+var f1 = 0;
+var g1 = 0;
+var h1 = 0;
+var i1 = 0;
+var j1 = 0;
+var k1 = 0;
+var l1 = 0;
+var m1 = 0;
+var n1 = 0;
+var o1 = 0;
+var p1 = 0;
+var q1 = 0;
+var r1 = 0;
+var s1 = 0;
+var t1 = 0;
+var u1 = 0;
+var v1 = 0;
+var w1 = 0;
+var x1 = 0;
+var y1 = 0;
+var z1 = 0;
+
+for (i = 0; i < sampleSpace.length; i++){
+  if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "A"){
+    a1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "B"){
+    b1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "C"){
+    c1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "D"){
+    d1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "E"){
+    e1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "F"){
+    f1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "G"){
+    g1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "H"){
+    h1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "I"){
+    i1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "J"){
+    j1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "K"){
+    k1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "L"){
+    l1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "M"){
+    m1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "N"){
+    n1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "O"){
+    o1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "P"){
+    p1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "Q"){
+    q1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "S"){
+    s1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "T"){
+    t1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "U"){
+    u1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "V"){
+    v1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "W"){
+    w1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "X"){
+    x1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "Y"){
+    y1 += sampleSpace[i].votes;
+  }
+  else if (sampleSpace[i].status == "invalid"){
+    z1 += sampleSpace[i].votes;
+  }
+}
+
+var round1Array = [];
+round1Array.push(a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1, v1, w1, x1, y1, z1);
+console.log(round1Array);
+
 // absolute Mehrheit? 
 // wenn nein:
 // Mindestzahl finden
