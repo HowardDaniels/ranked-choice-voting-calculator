@@ -487,14 +487,29 @@ for (i = 0; i < sampleSpace.length; i++){
 }
 
 var round1Array = [];
-round1Array.push(a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1, v1, w1, x1, y1, z1);
+var round1vars = [a1, b1, c1, d1, e1, f1, g1, h1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1, v1, w1, x1, y1, z1];
+
+for (i = 0; i < out.length; i++){
+  round1Array.push(round1vars[i]);
+}
+
+round1Array.push(z1);
+
 console.log(round1Array);
+
+var round1Total = 0;
+
+for (i = 0; i < round1Array.length - 1; i++){
+  round1Total += round1Array[i];
+}
+
+console.log(round1Total);
 
 // absolute Mehrheit? 
 // wenn nein:
 // Mindestzahl finden
 // Mindestzahl mit 0 ersetzen
-// zweite Preferezen vom Verlierer finden
+// zweite Preferenzen vom Verlierer finden
 // Stimmen an die jeweiligen anderen Kandidaten verteilen
 
 // [AZZ, BZZ, CZZ, ABZ, ACZ, BAZ, BCZ, CAZ, CBZ, ABC, ACB, BAC, BCA, CAB, CBA]
