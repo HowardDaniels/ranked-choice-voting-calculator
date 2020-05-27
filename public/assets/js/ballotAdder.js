@@ -460,6 +460,9 @@ for (i = 0; i < sampleSpace.length; i++){
   else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "Q"){
     q1 += sampleSpace[i].votes;
   }
+  else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "R"){
+    r1 += sampleSpace[i].votes;
+  }
   else if (sampleSpace[i].status == "valid" && sampleSpace[i].code.charAt(0) == "S"){
     s1 += sampleSpace[i].votes;
   }
@@ -487,7 +490,7 @@ for (i = 0; i < sampleSpace.length; i++){
 }
 
 var round1Array = [];
-var round1vars = [a1, b1, c1, d1, e1, f1, g1, h1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1, v1, w1, x1, y1, z1];
+var round1vars = [a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1, v1, w1, x1, y1, z1];
 
 for (i = 0; i < out.length; i++){
   round1Array.push(round1vars[i]);
@@ -519,44 +522,72 @@ if (toRound2 == 0){
 
 else if (toRound2 == 1){
 
-  var a2 = 0;
-  var b2 = 0;
-  var c2 = 0;
-  var d2 = 0;
-  var e2 = 0;
-  var f2 = 0;
-  var g2 = 0;
-  var h2 = 0;
-  var i2 = 0;
-  var j2 = 0;
-  var k2 = 0;
-  var l2 = 0;
-  var m2 = 0;
-  var n2 = 0;
-  var o2 = 0;
-  var p2 = 0;
-  var q2 = 0;
-  var r2 = 0;
-  var s2 = 0;
-  var t2 = 0;
-  var u2 = 0;
-  var v2 = 0;
-  var w2 = 0;
-  var x2 = 0;
-  var y2 = 0;
-  var z2 = 0;
+  var a2 = 0;   a2 += a1;
+  var b2 = 0;   b2 += b1;
+  var c2 = 0;   c2 += c1;
+  var d2 = 0;   d2 += d1;
+  var e2 = 0;   e2 += e1;
+  var f2 = 0;   f2 += f1;
+  var g2 = 0;   g2 += g1;
+  var h2 = 0;   h2 += h1;
+  var i2 = 0;   i2 += i1;
+  var j2 = 0;   j2 += j1;
+  var k2 = 0;   k2 += k1;
+  var l2 = 0;   l2 += l1;
+  var m2 = 0;   m2 += m1;
+  var n2 = 0;   n2 += n1;
+  var o2 = 0;   o2 += o1;
+  var p2 = 0;   p2 += p1;
+  var q2 = 0;   q2 += q1;
+  var r2 = 0;   r2 += r1;
+  var s2 = 0;   s2 += s1;
+  var t2 = 0;   t2 += t1;
+  var u2 = 0;   u2 += u1;
+  var v2 = 0;   v2 += v1;
+  var w2 = 0;   w2 += w1;
+  var x2 = 0;   x2 += x1;
+  var y2 = 0;   y2 += y1;
+  var z2 = 0;   z2 += z1;
 
   var round2Array = [];
-  var round2vars = [a2, b2, c2, d2, e2, f2, g2, h2, j2, k2, l2, m2, n2, o2, p2, q2, r2, s2, t2, u2, v2, w2, x2, y2, z2];
+  var round2vars = [a2, b2, c2, d2, e2, f2, g2, h2, i2, j2, k2, l2, m2, n2, o2, p2, q2, r2, s2, t2, u2, v2, w2, x2, y2, z2];
+  
+  console.log(round2vars);
 
- var eliminatedInRound1 = Math.min.apply(0, round1Array);
+var round1ValidOnly = [];
+for (i = 0; i < round1Array.length - 1; i++){
+  round1ValidOnly.push(round1Array[i]);
+}
+ var eliminatedInRound1 = Math.min.apply(0, round1ValidOnly);
+ console.log(eliminatedInRound1)
 
-//  for (i = 0; i < round1Array.length; i++){
-//    if (round1Array[i] == eliminatedInRound1){
-//      round2Array[i] = 0;
-//    }
-//  }
+for (i = 0; i < out.length; i++){
+  round2Array.push(round2vars[i]);
+}
+
+console.log(round2Array);
+
+round2Array.push(z2);
+console.log(z1);
+console.log(z2);
+
+ for (i = 0; i < round1Array.length; i++){
+   if (round1Array[i] == eliminatedInRound1){
+     round2Array[i] = 0;
+     for (j = 0; j < sampleSpace.length; j++){
+       if (sampleSpace[j].status == "valid" && sampleSpace[j].code.charAt(0) == alphabet[i]){
+         for (k = 0; k < round1Array.length; k++){
+           if (sampleSpace[j].code.charAt(1) == alphabet[k]){
+             round2Array[k] += sampleSpace[j].votes;
+           }
+         }
+       }
+    }
+   }
+ }
+
  console.log(round2Array);
+
 }
 
 // absolute Mehrheit? 
@@ -584,148 +615,6 @@ else if (toRound2 == 1){
 // A: [AZZ, ABZ, ACZ, ABC, ACB, CAZ, CAB]
 // B: [BZZ, BAZ, BCZ, BAC, BCA, CBZ, CBA]
 
-function nextRound(){
-  // determine if first round or subsequent round just finished
-  var voteList = [];
-for (i = 0; i < out.length; i++){
-  if (out[i].votes == Math.min.apply(min, voteList)){
-var eliminated = out[i];    
-  }
-}
-out[eliminated].votes = 0;
-}
-
-// var firstPref = [];
-
-// for (i = 0; i < out.length; i++){
-//   firstPref.push({
-//     name: i,
-//     ballots: []
-//   });
-// }
-
-// // console.log(firstPref);
-
-// for (i = 0; i < out.length; i++){
-//   var array = [];
-//   for (j = 0; j < ballots.length; j++){
-//     if (ballots[j].firstChoice == i){
-//       array.push(j);
-//       firstPref[i].ballots = array;
-//     }
-//   }
-// }
-
-// console.log(firstPref);
-
-// var secondPref = [];
-
-// for (i = 0; i < out.length; i++){
-//   secondPref.push({
-//     name: i,
-//     ballots: []
-//   });
-// }
-
-// // console.log(secondPref);
-
-// for (i = 0; i < out.length; i++){
-//   var array = [];
-//   for (j = 0; j < ballots.length; j++){
-//     if (ballots[j].secondChoice == i){
-//       array.push(j);
-//       secondPref[i].ballots = array;
-//     }
-//   }
-// }
-
-// console.log(secondPref);
-
-// var thirdPref = [];
-
-// for (i = 0; i < out.length; i++){
-//   thirdPref.push({
-//     name: i,
-//     ballots: []
-//   });
-// }
-
-// // console.log(secondPref);
-
-// for (i = 0; i < out.length; i++){
-//   var array = [];
-//   for (j = 0; j < ballots.length; j++){
-//     if (ballots[j].thirdChoice == i){
-//       array.push(j);
-//       thirdPref[i].ballots = array;
-//     }
-//   }
-// }
-
-// console.log(thirdPref);
-
-// var results1 = [];
-// var results2 = [];
-
-// var total1 = 0;
-// var total2 = 0;
-
-// for (i = 0; i < out.length; i++){
-//   total1 += firstPref[i].ballots.length;
-// }
-
-// for (i = 0; i < out.length; i++){
-//   results1.push({
-//     name: out[i].name,
-//     votes: firstPref[i].ballots.length,
-//     percent: (firstPref[i].ballots.length * 100)/total1
-//   });
-// }
-
-// console.log(results1);
-
-// var nextRoundNeeded = 0;
-
-// for (i = 0; i < results1.length; i++){
-//   if (results1[i].percent > 50){
-//   console.log("Winner: " + results1[i].name);
-//   }
-//   else{
-//     nextRoundNeeded += 1;
-//   }
-
-// }
-
-// if (nextRoundNeeded == results1.length){
-//   console.log("Next round needed");
-//   var arrayforElimination = [];
-//   for (i = 0; i < results1.length; i++){
-//     arrayforElimination.push(results1[i].percent);
-//   }
-//   console.log(Math.min.apply(Math, arrayforElimination));
-//   var eliminatedCandidate1;
-//   for (i = 0; i < results1.length; i++){
-//     if (results1[i].percent == Math.min.apply(Math, arrayforElimination)){
-//       eliminatedCandidate1 = results1[i].name;
-//       console.log(eliminatedCandidate1);
-//     }
-//   }
- 
-// }
-
-// const arraynum = [2, 5, 9];
-
-// console.log(arraynum);
-
-// const index = arraynum.indexOf(5);
-// if (index > -1) {
-//   arraynum.splice(index, 1);
-// }
-
-// // array = [2, 9]
-// console.log(arraynum); 
-
-  // $candidateList.append(candidateListItems);
 };
 
 // Gets candidates from the db and renders them
