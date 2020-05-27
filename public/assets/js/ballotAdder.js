@@ -505,6 +505,60 @@ for (i = 0; i < round1Array.length - 1; i++){
 
 console.log(round1Total);
 
+var toRound2 = 1;
+
+for (i = 0; i < round1Array.length - 1; i++){
+  if (round1Array[i]/round1Total > 0.5){
+    toRound2 -= 1;
+  }
+}
+
+if (toRound2 == 0){
+  console.log("no more rounds");
+}
+
+else if (toRound2 == 1){
+
+  var a2 = 0;
+  var b2 = 0;
+  var c2 = 0;
+  var d2 = 0;
+  var e2 = 0;
+  var f2 = 0;
+  var g2 = 0;
+  var h2 = 0;
+  var i2 = 0;
+  var j2 = 0;
+  var k2 = 0;
+  var l2 = 0;
+  var m2 = 0;
+  var n2 = 0;
+  var o2 = 0;
+  var p2 = 0;
+  var q2 = 0;
+  var r2 = 0;
+  var s2 = 0;
+  var t2 = 0;
+  var u2 = 0;
+  var v2 = 0;
+  var w2 = 0;
+  var x2 = 0;
+  var y2 = 0;
+  var z2 = 0;
+
+  var round2Array = [];
+  var round2vars = [a2, b2, c2, d2, e2, f2, g2, h2, j2, k2, l2, m2, n2, o2, p2, q2, r2, s2, t2, u2, v2, w2, x2, y2, z2];
+
+ var eliminatedInRound1 = Math.min.apply(0, round1Array);
+
+//  for (i = 0; i < round1Array.length; i++){
+//    if (round1Array[i] == eliminatedInRound1){
+//      round2Array[i] = 0;
+//    }
+//  }
+ console.log(round2Array);
+}
+
 // absolute Mehrheit? 
 // wenn nein:
 // Mindestzahl finden
