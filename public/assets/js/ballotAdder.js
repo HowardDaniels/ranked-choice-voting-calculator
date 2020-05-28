@@ -588,6 +588,26 @@ console.log(z2);
 
  console.log(round2Array);
 
+ var round2Total = 0;
+
+for (i = 0; i < round2Array.length - 1; i++){
+  round2Total += round2Array[i];
+}
+
+console.log(round2Total);
+
+ var toRound3 = 1;
+
+for (i = 0; i < round2Array.length - 1; i++){
+  if (round2Array[i]/round2Total > 0.5){
+    toRound3 -= 1;
+  }
+}
+
+if (toRound3 == 0){
+  console.log("no more rounds");
+}
+
 }
 
 // absolute Mehrheit? 
