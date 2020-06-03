@@ -574,6 +574,7 @@ console.log(z2);
  for (i = 0; i < round1Array.length; i++){
    if (round1Array[i] == eliminatedInRound1){
      round2Array[i] = 0;
+     var eliminatedInRound1Letter = alphabet[i];
      for (j = 0; j < sampleSpace.length; j++){
        if (sampleSpace[j].status == "valid" && sampleSpace[j].code.charAt(0) == alphabet[i]){
          for (k = 0; k < round1Array.length; k++){
@@ -606,6 +607,102 @@ for (i = 0; i < round2Array.length - 1; i++){
 
 if (toRound3 == 0){
   console.log("no more rounds");
+}
+
+else if (toRound3 == 1){
+
+  var a3 = 0;   a3 += a2;
+  var b3 = 0;   b3 += b2;
+  var c3 = 0;   c3 += c2;
+  var d3 = 0;   d3 += d2;
+  var e3 = 0;   e3 += e2;
+  var f3 = 0;   f3 += f2;
+  var g3 = 0;   g3 += g2;
+  var h3 = 0;   h3 += h2;
+  var i3 = 0;   i3 += i2;
+  var j3 = 0;   j3 += j2;
+  var k3 = 0;   k3 += k2;
+  var l3 = 0;   l3 += l2;
+  var m3 = 0;   m3 += m2;
+  var n3 = 0;   n3 += n2;
+  var o3 = 0;   o3 += o2;
+  var p3 = 0;   p3 += p2;
+  var q3 = 0;   q3 += q2;
+  var r3 = 0;   r3 += r2;
+  var s3 = 0;   s3 += s2;
+  var t3 = 0;   t3 += t2;
+  var u3 = 0;   u3 += u2;
+  var v3 = 0;   v3 += v2;
+  var w3 = 0;   w3 += w2;
+  var x3 = 0;   x3 += x2;
+  var y3 = 0;   y3 += y2;
+  var z3 = 0;   z3 += z2;
+
+  var round3Array = [];
+  var round3vars = [a3, b3, c3, d3, e3, f3, g3, h3, i3, j3, k3, l3, m3, n3, o3, p3, q3, r3, s3, t3, u3, v3, w3, x3, y3, z3];
+
+  console.log(round3vars);
+
+  var round2ValidOnly = [];
+  for (i = 0; i < round2Array.length - 1; i++){
+    round2ValidOnly.push(round2Array[i]);
+  }
+   var eliminatedInRound2 = Math.min.apply(0, round2ValidOnly);
+   console.log(eliminatedInRound2)
+  
+  for (i = 0; i < out.length; i++){
+    round3Array.push(round3vars[i]);
+  }
+  
+  console.log(round3Array);
+  
+  round3Array.push(z3);
+  
+   for (i = 0; i < round2Array.length; i++){
+     if (round2Array[i] == eliminatedInRound2){
+       round3Array[i] = 0;
+       var eliminatedInRound2Letter = alphabet[i];
+       for (j = 0; j < sampleSpace.length; j++){
+         if (sampleSpace[j].status == "valid" && sampleSpace[j].code.charAt(0) == alphabet[i]){
+           for (k = 0; k < round2Array.length; k++){
+             if (sampleSpace[j].code.charAt(1) == alphabet[k]){
+               round3Array[k] += sampleSpace[j].votes;
+             }
+           }
+         }
+         else if (sampleSpace[j].status == "valid" && sampleSpace[j].code.charAt(0) == eliminatedInRound1Letter && sampleSpace[j].code.charAt(1) == alphabet[i]){
+          for (k = 0; k < round2Array.length; k++){
+            if (sampleSpace[j].code.charAt(2) == alphabet[k]){
+              round3Array[k] += sampleSpace[j].votes;
+            }
+          }
+        }
+      }
+     }
+   }
+  
+   console.log(round3Array);
+  
+   var round3Total = 0;
+  
+  for (i = 0; i < round3Array.length - 1; i++){
+    round3Total += round3Array[i];
+  }
+  
+  console.log(round3Total);
+  
+   var toRound4 = 1;
+  
+  for (i = 0; i < round3Array.length - 1; i++){
+    if (round3Array[i]/round3Total > 0.5){
+      toRound4 -= 1;
+    }
+  }
+  
+  if (toRound4 == 0){
+    console.log("no more rounds");
+  }
+
 }
 
 }
