@@ -703,6 +703,10 @@ else if (toRound3 == 1){
     console.log("no more rounds");
   }
 
+  else if (toRound4 == 0){
+    // ... //
+  }
+
 }
 
 }
