@@ -705,6 +705,8 @@ else if (toRound3 == 1){
 
   else if (toRound4 == 0){
     // ... //
+var a4 = 0; a4 += a3;
+var b4 = 0; b4 += b3;
   }
 
 }
