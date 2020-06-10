@@ -707,6 +707,8 @@ else if (toRound3 == 1){
     // ... //
 var a4 = 0; a4 += a3;
 var b4 = 0; b4 += b3;
+var c4 = 0; c4 += c3;
+var d4 = 0; d4 += d3;
   }
 
 }
