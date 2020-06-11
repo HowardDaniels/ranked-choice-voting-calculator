@@ -709,6 +709,9 @@ var a4 = 0; a4 += a3;
 var b4 = 0; b4 += b3;
 var c4 = 0; c4 += c3;
 var d4 = 0; d4 += d3;
+var e4 = 0; e4 += e3;
+var f4 = 0; f4 += f3;
+var g4 = 0; g4 += g3;
   }
 
 }
