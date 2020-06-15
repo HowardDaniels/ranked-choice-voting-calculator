@@ -712,6 +712,9 @@ var d4 = 0; d4 += d3;
 var e4 = 0; e4 += e3;
 var f4 = 0; f4 += f3;
 var g4 = 0; g4 += g3;
+var h4 = 0; h4 += h3;
+var i4 = 0; i4 += i3;
+var j4 = 0; j4 += j3;
   }
 
 }
