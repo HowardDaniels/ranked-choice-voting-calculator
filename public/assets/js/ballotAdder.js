@@ -731,6 +731,23 @@ var w4 = 0; w4 += w3;
 var x4 = 0; x4 += x3;
 var y4 = 0; y4 += y3;
 var z4 = 0; z4 += z3;
+
+
+var round4Array = [];
+var round4vars = [a4, b4, c4, d4, e4, f4, g4, h4, i4, j4, k4, l4, m4, n4, o4, p4, q4, r4, s4, t4, u4, v4, w4, x4, y4, z4];
+
+console.log(round4vars);
+
+var round3ValidOnly = [];
+for (i = 0; i < round3Array.length - 1; i++){
+  round3ValidOnly.push(round3Array[i]);
+}
+ var eliminatedInRound3 = Math.min.apply(0, round2ValidOnly);
+ console.log(eliminatedInRound3)
+
+for (i = 0; i < out.length; i++){
+  round4Array.push(round4vars[i]);
+}
   }
 
 }
