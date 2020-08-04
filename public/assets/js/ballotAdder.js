@@ -748,6 +748,57 @@ for (i = 0; i < round3Array.length - 1; i++){
 for (i = 0; i < out.length; i++){
   round4Array.push(round4vars[i]);
 }
+
+// console.log(round4Array);
+  
+// round3Array.push(z4);
+
+//  for (i = 0; i < round3Array.length; i++){
+//    if (round3Array[i] == eliminatedInRound3){
+//      round4Array[i] = 0;
+//      var eliminatedInRound2Letter = alphabet[i];
+//      for (j = 0; j < sampleSpace.length; j++){
+//        if (sampleSpace[j].status == "valid" && sampleSpace[j].code.charAt(0) == alphabet[i]){
+//          for (k = 0; k < round2Array.length; k++){
+//            if (sampleSpace[j].code.charAt(1) == alphabet[k]){
+//              round3Array[k] += sampleSpace[j].votes;
+//            }
+//          }
+//        }
+//        else if (sampleSpace[j].status == "valid" && sampleSpace[j].code.charAt(0) == eliminatedInRound1Letter && sampleSpace[j].code.charAt(1) == alphabet[i]){
+//         for (k = 0; k < round2Array.length; k++){
+//           if (sampleSpace[j].code.charAt(2) == alphabet[k]){
+//             round3Array[k] += sampleSpace[j].votes;
+//           }
+//         }
+//       }
+//     }
+//    }
+//  }
+
+//  console.log(round3Array);
+
+//  var round3Total = 0;
+
+// for (i = 0; i < round3Array.length - 1; i++){
+//   round3Total += round3Array[i];
+// }
+
+// console.log(round3Total);
+
+//  var toRound4 = 1;
+
+// for (i = 0; i < round3Array.length - 1; i++){
+//   if (round3Array[i]/round3Total > 0.5){
+//     toRound4 -= 1;
+//   }
+// }
+
+// if (toRound4 == 0){
+//   console.log("no more rounds");
+// }
+
+// else if (toRound4 == 0){
   }
 
 }
