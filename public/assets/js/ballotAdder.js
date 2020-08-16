@@ -159,13 +159,27 @@ fetch(url)
 .then((out) => {
   console.log('Checkout this JSON! ', out);
   console.log(out.length);
- 
+  for (i = 0; i < out.length; i++){
+    var option = document.createElement("OPTION");
+    option.value = i;
+    option.textContent = out[i].name;
+    document.getElementById("firstChoice").appendChild(option);
+    document.getElementById("secondChoice").appendChild(option);
+    document.getElementById("thirdChoice").appendChild(option);
+    // document.getElementById("firstChoice").append("<option value=" + i + "><option>");
+    }
+  // for (i = 0; i < out.length; i++){
+  // document.getElementsByTagName("option")[i + 1].innerText = out[i].name;
+  // }
+
 let url2 = '/api/ballots';
 
 fetch (url2)
 .then(res => res.json())
 .then((out) => {
   console.log(out);
+
+ 
 
   var firstRoundResults = [];
 })
