@@ -164,24 +164,46 @@ fetch(url)
     option.value = i;
     option.textContent = out[i].name;
     document.getElementById("firstChoice").appendChild(option);
-    document.getElementById("secondChoice").appendChild(option);
-    document.getElementById("thirdChoice").appendChild(option);
-    // document.getElementById("firstChoice").append("<option value=" + i + "><option>");
     }
-  // for (i = 0; i < out.length; i++){
-  // document.getElementsByTagName("option")[i + 1].innerText = out[i].name;
-  // }
+
+    for (i = 0; i < out.length; i++){
+      var option = document.createElement("OPTION");
+      option.value = i;
+      option.textContent = out[i].name;
+      document.getElementById("secondChoice").appendChild(option);
+      }
+
+      for (i = 0; i < out.length; i++){
+        var option = document.createElement("OPTION");
+        option.value = i;
+        option.textContent = out[i].name;
+        document.getElementById("thirdChoice").appendChild(option);
+        }
+
+        document.getElementById("submit").addEventListener("click", function(){
+        var ballotFirst = document.getElementById("firstChoice").value;
+        var ballotSecond = document.getElementById("secondChoice").value;
+        var ballotThird = document.getElementById("thirdChoice").value;
+
+        var fullBallot = {ballotFirst, ballotSecond, ballotThird};
+        ballot = fullBallot;
+        saveBallot(ballot);
+      
+        });
 
 let url2 = '/api/ballots';
 
 fetch (url2)
 .then(res => res.json())
-.then((out) => {
-  console.log(out);
+.then((out2) => {
+  console.log(out2);
 
  
 
   var firstRoundResults = [];
+  for (i = 0; i < out; i++){
+    // {out[i].name: 0}
+  }
 })
 
 
