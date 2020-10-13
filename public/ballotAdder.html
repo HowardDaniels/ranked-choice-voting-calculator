@@ -1,0 +1,71 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ballot Adder</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/flatly/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Ranked Choice Voting Calculator
+    </a>
+    <div class="icons">
+      <i class="fas fa-save text-light save-note" src="/api/ballotAdder"></i>
+      <i class="fas fa-pen text-light new-note"></i>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <h2>Add candidates</h2>
+    </div>
+    <div class="row">
+      <input id="candidateInput" />
+      <button id="newCandidate">+</button>
+    </div>
+    <div>
+    <ul class="list-group" id="candList">
+
+    </ul>
+    </div>
+  </div>
+<hr>
+  <div class="container-fluid">
+    <div class="row">
+      <h2>Add ballots</h2>
+    </div>
+    <label for="firstChoice">First choice:</label>
+
+<select id="firstChoice">
+  <option value="x" selected>Choose a candidate</option>
+</select>
+<br>
+<label for="secondChoice">Second choice:</label>
+
+<select id="secondChoice">
+  <option value="x" selected>Choose a candidate</option>
+</select>
+<br>
+<label for="thirdChoice">Third choice:</label>
+
+<select id="thirdChoice">
+  <option value="x" selected>Choose a candidate</option>
+</select>
+
+<br>
+
+<button id="submit">Submit</button>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="assets/js/ballotAdder.js"></script>
+</body>
+
+</html>
