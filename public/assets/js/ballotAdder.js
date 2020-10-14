@@ -198,6 +198,15 @@ fetch (url2)
 .then((out2) => {
   console.log(out2);
 
+  var resultArray = [];
+  var threeChoiceArray = [0, 0, 0];
+
+  for (i = 0; i < out.length; i++){
+    resultArray.push(threeChoiceArray);
+  }
+
+  console.log(resultArray);
+
  
 
   var firstRoundResults = [];
