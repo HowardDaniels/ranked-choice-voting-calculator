@@ -183,7 +183,15 @@ fetch(url)
         document.getElementById("submit").addEventListener("click", function(){
         var ballotFirst = document.getElementById("firstChoice").value;
         var ballotSecond = document.getElementById("secondChoice").value;
-        var ballotThird = document.getElementById("thirdChoice").value;
+        var ballotThird = document.getElementById("").thirdChoicevalue;
+
+      var blankBallot = "";
+
+        for (i = 0; i < out.length; i++){
+          blankBallot + "000";
+        }
+
+        console.log(blankBallot);
 
         var fullBallot = {ballotFirst, ballotSecond, ballotThird};
         ballot = fullBallot;
@@ -206,6 +214,35 @@ fetch (url2)
   }
 
   console.log(resultArray);
+
+  var blankBallot = "";
+
+        for (i = 0; i < out.length; i++){
+          blankBallot += "000";
+        }
+
+        console.log(blankBallot);
+
+        console.log(out2[0].ballotFirst);
+
+        var ballotArray = [];
+
+        for (i = 0; i < out2.length; i++){
+          ballotArray.push(blankBallot);
+        }
+
+        console.log(ballotArray);
+
+        for (i = 0; i < out2.length; i++){
+        console.log(ballotArray[i]);
+
+       var intx = (parseInt(out2[i].ballotFirst)*3);
+
+       ballotArray[i] = ballotArray[i].substr(0, intx) + "1" + ballotArray[i].substr(intx, ballotArray[i].length - 1);
+
+        }
+
+        console.log(ballotArray);
 
  
 
