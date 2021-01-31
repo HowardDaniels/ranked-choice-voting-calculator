@@ -13,8 +13,7 @@ app.set('mess', '');
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 
-var candidates = require("../candidates.json");
-var ballots = require("../ballots.json");
+var notes = require("../ballots.json");
 // var waitListData = require("../data/waitinglistData");
 
 
@@ -28,16 +27,14 @@ module.exports = function(app) {
   // In each of the below cases when a user visits a link
   // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
   // ---------------------------------------------------------------------------
-
   app.get("/api/candidates", function(req, res) {
-  res.json(candidates);
-  console.log(res);
-  });
+    res.json(candidates);
+    });
 
-  app.get("/api/ballots", function(req, res){
-    res.json(ballots);
-    console.log(res);
-  })
+
+  app.get("/api/ballots", function(req, res) {
+  res.json(ballots);
+  });
 
 /*
   app.get("/api/waitlist", function(req, res) {
@@ -51,7 +48,6 @@ module.exports = function(app) {
   // (ex. User fills out a reservation request... this data is then sent to the server...
   // Then the server saves the data to the tableData array)
   // ---------------------------------------------------------------------------
-
   app.post("/api/candidates", function(req, res) {
     // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
     // It will do this by sending out the value "true" have a table
@@ -74,26 +70,37 @@ req.body.id = candidates.length;
     } */
   });
 
-  app.post("/api/ballots", function(req, res){
-    ballots.push(req.body);
-    req.body.id = ballots.length;
-    fs.writeFile("ballots.json", JSON.stringify(ballots), function(err){
-      if (err) {
-        throw err;
-      }
-    });
 
-    res.json(true);
+  app.post("/api/ballots", function(req, res) {
+    // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
+    // It will do this by sending out the value "true" have a table
+    // req.body is available since we're using the body parsing middleware
+    //if (notes.length < 5) {
+      ballots.push(req.body);
+/* add ordered ID to notes */
+req.body.id = ballots.length;
+      fs.writeFile("ballots.json", JSON.stringify(ballots), function(err) {
+        if (err) {
+          throw err;
+        }
+      });
+
+      res.json(true);
+ /*   }
+    else {
+      waitListData.push(req.body);
+      res.json(false);
+    } */
   });
 
   // ---------------------------------------------------------------------------
 // DELETE
 
-  app.delete("/api/candidates/:id", function(req, res) {
+
+app.delete("/api/candidates/:id", function(req, res) {
     // Sets length of note to 0
     // notes.length = 0;
     var id = req.params.id;
-    console.log(id);
     candidates.splice(candidates.id, 1);
     console.log("I just deleted")
    
@@ -112,38 +119,26 @@ req.body.id = candidates.length;
   } */
 });
 
-app.delete("/api/ballots/:id", function(req, res) {
-  // Sets length of note to 0
-  // notes.length = 0;
-  var id = req.params.id;
-  console.log(id);
-  console.log(ballots);
-  console.log(JSON.stringify(ballots));
-  // console.log(this.id);
-  ballots.splice(ballots.id, 1);
-  console.log("I just deleted")
+  app.delete("/api/ballots/:id", function(req, res) {
+    // Sets length of note to 0
+    // notes.length = 0;
+    var id = req.params.id;
+    ballots.splice(ballots.id, 1);
+    console.log("I just deleted")
+   
+    //write back to journal.json
+    fs.writeFile("ballots.json", JSON.stringify(ballots), function(err) {
+      if (err) {
+        throw err;
+      }
+    });
 
-  // for (i = 0; i<ballot.length; i++){
-  //   ballot[i].id = i+1;
-  //   console.log(ballot[i].name);
-  // }
-
-  // 1, 2, 3, 4, 5, 6
-  // 1, 2, 4, 5, 6
- 
-  //write back to journal.json
-  fs.writeFile("ballots.json", JSON.stringify(ballots), function(err) {
-    if (err) {
-      throw err;
-    }
-  });
-
-  res.json(true);
+    res.json(true);
 /*   }
-else {
-  waitListData.push(req.body);
-  res.json(false);
-} */
+  else {
+    waitListData.push(req.body);
+    res.json(false);
+  } */
 });
 
   

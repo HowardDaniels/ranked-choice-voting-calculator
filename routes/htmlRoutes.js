@@ -17,23 +17,23 @@ module.exports = function(app) {
   // ---------------------------------------------------------------------------
 
 
-  app.get("/ballotAdder", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/ballotAdder.html"));
+  app.get("/ballots", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/ballots.html"));
   });
 
   
-  app.get("../assets/css/styles.css", function(req, res) {
-    res.sendFile(path.join(__dirname, "../assets/css/styles.css"));
+  app.get("../assets/css/index.css", function(req, res) {
+    res.sendFile(path.join(__dirname, "../assets/css/index.css"));
   });
 
   app.get("../assets/js/index.js", function(req, res) {
     res.sendFile(path.join(__dirname, "../assets/js/index.js"));
   });
-
+/*
   app.get("/*", function(req, res) {
-   res.sendFile(path.join(__dirname, "../public/index.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
-
+*/
   // If no matching route is found default to home
   app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
